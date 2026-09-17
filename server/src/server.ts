@@ -1,8 +1,12 @@
 import "dotenv/config";
 import app from "./app.js";
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-app.listen(PORT, () => {
-console.log(`Flowdesk API running on PORT ${PORT} `);
-})
+const server = app.listen(PORT, "127.0.0.1", () => {
+  console.log(`Flowdesk API running at http://127.0.0.1:${PORT}`);
+});
+
+server.on("error", (error) => {
+  console.error("SERVER ERROR:", error);
+});

@@ -1,14 +1,13 @@
 import express from "express";
+import healthRoutes from "./routes/health.routes.js";
+import { errorHandler } from "./middleware/error.middleware.js";
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/api/health", (req,res) => {
-    res.json({
-        sucess:true,
-        message:"Flowdesk API is running"
-    });
-});
+app.use("/api", healthRoutes);
+
+app.use(errorHandler);
 
 export default app;
